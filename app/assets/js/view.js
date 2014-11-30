@@ -10,7 +10,16 @@ flowmaker.View = draw2d.Canvas.extend({
     this.installEditPolicy(policy);
 
     // Set scrolling area
-    this.setScrollArea("#" + id);
+    this.setScrollArea($("#" + id));
+
+    this.on('scroll', function(){
+        console.log(arguments);
+    });
+  },
+
+  scrollTopLeft: function() {
+    this.scrollArea.scrollTop(0);
+    this.scrollArea.scrollLeft(0);
   }
 
 });

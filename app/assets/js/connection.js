@@ -75,3 +75,10 @@ flowmaker.Connection = draw2d.Connection.extend({
   }
 
 });
+
+/*
+ * Return a special kind of connection
+ */
+draw2d.Connection.createConnection = function(sourcePort, targetPort) {
+  return new flowmaker.Connection();
+};

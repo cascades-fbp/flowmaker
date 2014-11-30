@@ -33,15 +33,8 @@ flowmaker.Toolbar = Class.extend({
       self.app.layout();
     });
 
-    $('#toolbar-upload').on('click', function(){
-      var localStorage = new draw2d.storage.LocalFileStorage();
-      localStorage.promptForFilename(function(){
-        console.log("success()");
-        console.log(arguments);
-      }, function(){
-        console.log("abort()");
-        console.log(arguments);
-      });
+    $('#toolbar-help').on('click', function(){
+      self.app.showHelp();
     });
 
   }

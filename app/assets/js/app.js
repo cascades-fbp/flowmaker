@@ -16,7 +16,8 @@ flowmaker.Application = Class.extend({
   init: function() {
     this.view = new flowmaker.View("canvas");
     this.toolbar = new flowmaker.Toolbar(this, this.view);
-    this.appLayout = $('body').layout({
+    /*
+    this.appLayout = $('#main').layout({
       north: {
         resizable: false,
         closable: false,
@@ -33,6 +34,7 @@ flowmaker.Application = Class.extend({
         paneSelector: "#canvas"
       }
     });
+    */
 
     // Keeps the last mouse event
     this.lastMouseEvent = null;
@@ -53,18 +55,15 @@ flowmaker.Application = Class.extend({
    * Update diagram layout
    */
   layout: function() {
-    this.appLayout.resizeAll();
+    //this.appLayout.resizeAll();
   },
 
   /**
    * Canvas' contextmenu event handler
    */
   onContextMenu: function(view, e) {
-    console.log("onContextMenu()");
-
     var figure = this.view.getBestFigure(e.x, e.y);
     if (figure != null) {
-      console.log("onContextMenu() hit something, not a canvas...")
       return false;
     }
 
@@ -137,7 +136,6 @@ flowmaker.Application = Class.extend({
    * Canvas' dblclick event handler
    */
   onDoubleClick: function(emitterFunction) {
-    console.log("onDoubleClick()")
   },
 
   /**
@@ -145,8 +143,6 @@ flowmaker.Application = Class.extend({
    * class on the canvas to receive this event.
    */
   onSelectionChanged: function(emitter, figure) {
-    console.log("onSelectionChanged()");
-    console.log(arguments);
   },
 
   /**
@@ -154,8 +150,6 @@ flowmaker.Application = Class.extend({
    * can be used to identify the type of event which has occurred.
    **/
   stackChanged: function(event) {
-    console.log("stackChanged()")
-    console.log(event);
   },
 
   /**
@@ -164,18 +158,16 @@ flowmaker.Application = Class.extend({
   load: function(jsonDocument) {
     this.view.setZoom(1.0, true);
     this.view.clear();
+    this.view.scrollTopLeft();
 
     var reader = new draw2d.io.json.Reader();
-    var res = reader.unmarshal(this.view, jsonDocument);
-    console.log(res);
+    reader.unmarshal(this.view, jsonDocument);
   },
 
   /**
    * Shows confirm dialog and resets the canvas if confirmed
    */
   newFlow: function() {
-    console.log("newFlow()");
-
     var modal = $('#confirmModal');
     modal.find('.modal-title').text("Create New Flow");
     modal.find('.modal-body').html("Are you sure to reset the canvas and start a new flow?<br/><br/>Any unsaved changes in the current flow will be lost!");
@@ -199,11 +191,9 @@ flowmaker.Application = Class.extend({
    * Open a new flow from local file system
    */
   openFlow: function() {
-    console.log("openFlow()");
-
     var modal = $('#confirmModal');
     modal.find('.modal-title').text("Open New Flow");
-    modal.find('.modal-body').html('<input type="file" id="storage_files" name="files" /><br/><br/>Any unsaved changes in the current flow will be lost!');
+    modal.find('.modal-body').html('<input type="file" class="form-control" id="storage_files" name="files" /><br/>Any unsaved changes in the current flow will be lost!');
 
     modal.find('.btn-danger').hide();
 
@@ -239,7 +229,7 @@ flowmaker.Application = Class.extend({
    */
   saveFlow: function() {
     this._openSingleInputModal("Save Flow to File",
-      "Local Filepath",
+      "Filename",
       "Save",
       $.proxy(function() {
         var writer = new draw2d.io.json.Writer();
@@ -252,7 +242,7 @@ flowmaker.Application = Class.extend({
           });
           */
           var blob = new Blob([JSON.stringify(json, null, 2)], {type: "application/json"});
-          saveAs(blob, "demo.json");
+          saveAs(blob, $('#single-content').val());
 
         });
         return true;
@@ -263,8 +253,6 @@ flowmaker.Application = Class.extend({
    * Show modal dialog to create a new component
    */
   addComponent: function() {
-    console.log("addComponent()");
-
     var modal = $('#addComponentModal');
 
     modal.find('.modal-title').text("New Component");
@@ -289,8 +277,6 @@ flowmaker.Application = Class.extend({
    * Handle adding new component
    */
   handleAddComponent: function() {
-    console.log("handleAddComponent()");
-
     var form = $('#addComponentModal');
 
     // Validate input
@@ -426,16 +412,22 @@ flowmaker.Application = Class.extend({
       $.proxy(function() {
         return this._handleSingleInputModalSave(flowmaker.Legend);
       }, this));
+  },
+
+  /*
+   * Show modal dialog with a brief help
+   */
+  showHelp: function() {
+    var modal = $('#helpModal');
+    modal.modal('show');
   }
 
 });
 
 $(window).load(function() {
   var app = new flowmaker.Application();
-
-  // return a special kind of connection
-  draw2d.Connection.createConnection = function(sourcePort, targetPort) {
-    return new flowmaker.Connection();
-  };
-
+  $(window).resize(function(){
+    console.log(this);
+  });
 });
+

@@ -22,65 +22,53 @@ module.exports = function(grunt) {
       },
       js_frontend: {
         src: [
-          './bower_components/jquery/dist/jquery.js',
-          './bower_components/jquery-ui/jquery-ui.js',
-          './bower_components/jsPlumb/dist/js/dom.jsPlumb-1.7.2.js',
-          './app/assets/js/frontend.js'
+          './vendors/draw2d_GPL_5/lib/jquery-1.10.2.min.js',
+          './vendors/draw2d_GPL_5/lib/jquery.autoresize.js',
+          './vendors/draw2d_GPL_5/lib/jquery-touch_punch.js',
+          './vendors/draw2d_GPL_5/lib/jquery.contextmenu.js',
+          './vendors/draw2d_GPL_5/lib/shifty.js',
+          './vendors/draw2d_GPL_5/lib/raphael.js',
+          './vendors/draw2d_GPL_5/lib/rgbcolor.js',
+          './vendors/draw2d_GPL_5/lib/canvg.js',
+          './vendors/draw2d_GPL_5/lib/Class.js',
+          './vendors/draw2d_GPL_5/lib/json2.js',
+          './vendors/draw2d_GPL_5/lib/pathfinding-browser.min.js',
+          './vendors/draw2d_GPL_5/src/draw2d.js',
+          './bower_components/jquery.browser/dist/jquery.browser.min.js',
+          './bower_components/FileSaver.js/FileSaver.min.js',
+          './bower_components/bootstrap/dist/js/bootstrap.min.js',
+          './app/assets/js/app.js',
+          './app/assets/js/view.js',
+          './app/assets/js/toolbar.js',
+          './app/assets/js/properties.js',
+          './app/assets/js/connection.js',
+          './app/assets/js/component.js',
+          './app/assets/js/iip.js',
+          './app/assets/js/exports.js',
+          './app/assets/js/legend.js',
         ],
         dest: './public/assets/js/frontend.js',
       },
       css_fronend: {
         src: [
-          './bower_components/jsPlumb/dist/css/jsplumb.css',
+          './vendors/draw2d_GPL_5/css/contextmenu.css',
+          './bower_components/bootstrap/dist/css/bootstrap.min.css',
           './app/assets/css/frontend.css'
         ],
         dest: './public/assets/css/frontend.css',
-      }
-      //dist: {
-      //  src: ['lib/<%= pkg.name %>.js'],
-      //  dest: 'dist/<%= pkg.name %>.js'
-      //}
-    },
-    /*
-    copy: {
-      fonts: {
-        expand: true,
-        cwd: './bower_components/jsPlumb/dist/css',
-        src: 'OpenSans*.*',
-        dest: './public/assets/css/',
-        flatten: true,
-        filter: 'isFile',
-      }
-    },
-    */
-    /*
-    less: {
-      development: {
-        options: {
-          compress: true, // minifying the result
-        },
-        files: {
-          //compiling frontend.less into frontend.css
-          "./public/assets/stylesheets/frontend.css": "./app/assets/stylesheets/frontend.less"
-        }
       }
     },
     uglify: {
       options: {
         banner: '<%= banner %>',
-        mangle: false // Use if you want the names of your functions and variables unchanged
+        mangle: true // Use if you want the names of your functions and variables unchanged
       },
       frontend: {
         files: {
-          './public/assets/javascript/frontend.js': './public/assets/javascript/frontend.js',
+          './public/assets/js/frontend.js': './public/assets/js/frontend.js',
         }
       }
-      //dist: {
-      //  src: '<%= concat.dist.dest %>',
-      //  dest: 'dist/<%= pkg.name %>.min.js'
-      //}
     },
-    */
     jshint: {
       options: {
         curly: true,
@@ -136,6 +124,7 @@ module.exports = function(grunt) {
         }
       },
     },
+    /*
     watch: {
       gruntfile: {
         files: '<%= jshint.gruntfile.src %>',
@@ -161,15 +150,14 @@ module.exports = function(grunt) {
           livereload: true //reloads the browser
         }
       },
-      /*
-      less: {
-        files: ['./app/assets/stylesheets/frontend.css'],  //watched files
-        //tasks: ['less'],                          //tasks to run
-        options: {
-          livereload: true                        //reloads the browser
-        }
+    },
+    */
+    nodewebkit: {
+      options: {
+        platforms: ['osx'],
+        buildDir: './webkitbuilds',
       },
-      */
+      src: ['./public/**/*']
     }
   });
 
@@ -178,13 +166,15 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
-  grunt.loadNpmTasks('grunt-contrib-less');
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-copy');
+  grunt.loadNpmTasks('grunt-node-webkit-builder');
 
   // Default task.
-  grunt.registerTask('build', ['jshint', 'concat']);
+  grunt.registerTask('build', ['jshint', 'concat', 'uglify']);
   //grunt.registerTask('default', ['build', 'connect:public', 'watch']);
   grunt.registerTask('default', ['connect:root']);
+  // Build the desktop app
+  grunt.registerTask('app', ['build', 'nodewebkit']);
 };

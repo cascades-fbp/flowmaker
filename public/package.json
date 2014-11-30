@@ -1,0 +1,28 @@
+{
+  "main": "app.html",
+  "name": "FlowMaker",
+  "description": "A visual FBP designing tool",
+  "version": "0.0.1",
+  "keywords": [
+    "dataflow",
+    "fbp",
+    "node-webkit"
+  ],
+  "window": {
+    "title": "FlowerMaker v0.0.1",
+    "icon": "link.png",
+    "toolbar": false,
+    "frame": true,
+    "width": 900,
+    "height": 500,
+    "position": "center",
+    "min_width": 800,
+    "min_height": 600,
+    "show": true
+  },
+  "webkit": {
+    "plugin": false
+  },
+  "dependencies": {
+  }
+}
