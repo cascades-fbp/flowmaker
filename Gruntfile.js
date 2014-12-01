@@ -61,7 +61,7 @@ module.exports = function(grunt) {
     uglify: {
       options: {
         banner: '<%= banner %>',
-        mangle: true // Use if you want the names of your functions and variables unchanged
+        mangle: false
       },
       frontend: {
         files: {
@@ -89,18 +89,6 @@ module.exports = function(grunt) {
         src: 'Gruntfile.js'
       }
     },
-    /*
-    browserify: {
-      dist: {
-        files: {
-          './public/assets/javascript/frontend.js': './public/assets/javascript/frontend.js',
-        },
-        options: {
-          //transform: ['coffeeify']
-        }
-      }
-    },
-    */
     connect: {
       public: {
         options:{
@@ -124,37 +112,10 @@ module.exports = function(grunt) {
         }
       },
     },
-    /*
-    watch: {
-      gruntfile: {
-        files: '<%= jshint.gruntfile.src %>',
-        tasks: ['jshint:gruntfile']
-      },
-      js_frontend: {
-        files: [
-          //watched files
-          './app/assets/js/frontend.js'
-          ],
-        tasks: ['concat:js_frontend'], //tasks to run
-        options: {
-          livereload: true //reloads the browser
-        }
-      },
-      css_frontend: {
-        files: [
-          //watched files
-          './app/assets/css/frontend.css'
-          ],
-        tasks: ['concat:css_frontend'], //tasks to run
-        options: {
-          livereload: true //reloads the browser
-        }
-      },
-    },
-    */
     nodewebkit: {
       options: {
-        platforms: ['osx'],
+        platforms: ['osx', 'win', 'linux64'],
+        credits: './public/credits.html',
         buildDir: './webkitbuilds',
       },
       src: ['./public/**/*']
@@ -165,9 +126,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-  grunt.loadNpmTasks('grunt-contrib-watch');
   grunt.loadNpmTasks('grunt-contrib-connect');
-  grunt.loadNpmTasks('grunt-browserify');
   grunt.loadNpmTasks('grunt-contrib-copy');
   grunt.loadNpmTasks('grunt-node-webkit-builder');
 

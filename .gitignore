@@ -1,0 +1,8 @@
+node_modules/
+bower_components/
+webkitbuilds/
+cache/
+public/assets/
+vendors/draw2d_GPL_5/examples/
+vendors/draw2d_GPL_5/jsdoc/
+node-webkit-v0.11.2-osx-x64/

@@ -342,8 +342,8 @@
   {
     "type": "flowmaker.Legend",
     "id": "176cf5fb-d7a2-e6f7-40b6-3f5c97e7b131",
-    "x": 20,
-    "y": 70,
+    "x": 70,
+    "y": 60,
     "width": 164.3125,
     "height": 23.1875,
     "alpha": 1,

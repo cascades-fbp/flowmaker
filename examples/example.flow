@@ -1,0 +1,411 @@
+[
+  {
+    "type": "flowmaker.IIP",
+    "id": "aff75649-21b9-2e28-9e8f-ca0d56224938",
+    "x": 160,
+    "y": 120,
+    "width": 32.015625,
+    "height": 21.421875,
+    "alpha": 1,
+    "userData": {},
+    "cssClass": "flowmaker_IIP",
+    "ports": [
+      {
+        "name": "output0",
+        "port": "draw2d.OutputPort",
+        "locator": "draw2d.layout.locator.OutputPortLocator"
+      }
+    ],
+    "bgColor": "none",
+    "color": "#1B1B1B",
+    "stroke": 1,
+    "radius": 0,
+    "text": "GO!",
+    "outlineStroke": 0,
+    "outlineColor": "none",
+    "fontSize": 12,
+    "fontColor": "#080808",
+    "fontFamily": null
+  },
+  {
+    "type": "flowmaker.Component",
+    "id": "d880cca8-6005-fdf5-479a-1e29e08098e8",
+    "x": 300,
+    "y": 120,
+    "width": 90,
+    "height": 143,
+    "alpha": 1,
+    "userData": {
+      "name": "Sometest",
+      "component": "testing"
+    },
+    "cssClass": "flowmaker_Component",
+    "ports": [
+      {
+        "name": "input0",
+        "port": "draw2d.InputPort",
+        "locator": "draw2d.layout.locator.InputPortLocator"
+      },
+      {
+        "name": "input1",
+        "port": "draw2d.InputPort",
+        "locator": "draw2d.layout.locator.InputPortLocator"
+      },
+      {
+        "name": "input2",
+        "port": "draw2d.InputPort",
+        "locator": "draw2d.layout.locator.InputPortLocator"
+      },
+      {
+        "name": "input3",
+        "port": "draw2d.InputPort",
+        "locator": "draw2d.layout.locator.InputPortLocator"
+      },
+      {
+        "name": "output0",
+        "port": "draw2d.OutputPort",
+        "locator": "draw2d.layout.locator.OutputPortLocator"
+      },
+      {
+        "name": "output1",
+        "port": "draw2d.OutputPort",
+        "locator": "draw2d.layout.locator.OutputPortLocator"
+      }
+    ],
+    "bgColor": "#00A8F0",
+    "color": "#1B1B1B",
+    "stroke": 1,
+    "radius": 0
+  },
+  {
+    "type": "flowmaker.Component",
+    "id": "47d6b24a-2811-1727-a1f3-c887994ef077",
+    "x": 120,
+    "y": 220,
+    "width": 90,
+    "height": 65,
+    "alpha": 1,
+    "userData": {
+      "name": "test1",
+      "component": "test"
+    },
+    "cssClass": "flowmaker_Component",
+    "ports": [
+      {
+        "name": "output0",
+        "port": "draw2d.OutputPort",
+        "locator": "draw2d.layout.locator.OutputPortLocator"
+      }
+    ],
+    "bgColor": "#EFEFEF",
+    "color": "#1B1B1B",
+    "stroke": 1,
+    "radius": 0
+  },
+  {
+    "type": "flowmaker.Legend",
+    "id": "b9f6f1ab-32a4-ef86-f9e4-2e2cf859d598",
+    "x": 670,
+    "y": 80,
+    "width": 82.59375,
+    "height": 23.1875,
+    "alpha": 1,
+    "userData": {},
+    "cssClass": "flowmaker_Legend",
+    "ports": [],
+    "bgColor": "#5B5B5B",
+    "color": "#FFFFFF",
+    "stroke": 1,
+    "radius": 5,
+    "text": "Just a comment",
+    "outlineStroke": 0,
+    "outlineColor": "none",
+    "fontSize": 14,
+    "fontColor": "#FFFFFF",
+    "fontFamily": null
+  },
+  {
+    "type": "flowmaker.Component",
+    "id": "5959d02d-74f6-c541-e53d-fe1c4c866fa0",
+    "x": 490,
+    "y": 100,
+    "width": 90,
+    "height": 71.5,
+    "alpha": 1,
+    "userData": {
+      "name": "NeedsName",
+      "component": "NeedsComponent"
+    },
+    "cssClass": "flowmaker_Component",
+    "ports": [
+      {
+        "name": "input0",
+        "port": "draw2d.InputPort",
+        "locator": "draw2d.layout.locator.InputPortLocator"
+      },
+      {
+        "name": "output0",
+        "port": "draw2d.OutputPort",
+        "locator": "draw2d.layout.locator.OutputPortLocator"
+      },
+      {
+        "name": "output1",
+        "port": "draw2d.OutputPort",
+        "locator": "draw2d.layout.locator.OutputPortLocator"
+      }
+    ],
+    "bgColor": "#B9DD69",
+    "color": "#1B1B1B",
+    "stroke": 1,
+    "radius": 0
+  },
+  {
+    "type": "flowmaker.ExportedOutput",
+    "id": "185d1e7b-b066-2925-0b34-b62d852cdc77",
+    "x": 690,
+    "y": 200,
+    "width": 40,
+    "height": 40,
+    "alpha": 1,
+    "userData": {
+      "name": "OUT_RESULT"
+    },
+    "cssClass": "flowmaker_ExportedOutput",
+    "ports": [
+      {
+        "name": "OUT_RESULT",
+        "port": "draw2d.InputPort",
+        "locator": "draw2d.layout.locator.InputPortLocator"
+      }
+    ],
+    "bgColor": "#333333",
+    "color": "#1B1B1B",
+    "stroke": 0,
+    "radius": 0
+  },
+  {
+    "type": "flowmaker.Component",
+    "id": "33ced729-f3fa-03b7-6d5e-83a751c5c35a",
+    "x": 640,
+    "y": 330,
+    "width": 90,
+    "height": 65,
+    "alpha": 1,
+    "userData": {
+      "name": "Errors",
+      "component": "console"
+    },
+    "cssClass": "flowmaker_Component",
+    "ports": [
+      {
+        "name": "input0",
+        "port": "draw2d.InputPort",
+        "locator": "draw2d.layout.locator.InputPortLocator"
+      }
+    ],
+    "bgColor": "#F3546A",
+    "color": "#1B1B1B",
+    "stroke": 1,
+    "radius": 0
+  },
+  {
+    "type": "flowmaker.ExportedInput",
+    "id": "32a3a3ae-550c-bb2f-0d85-36964c9b12f3",
+    "x": 160,
+    "y": 370,
+    "width": 50,
+    "height": 50,
+    "alpha": 1,
+    "userData": {
+      "name": "DATA_IN"
+    },
+    "cssClass": "flowmaker_ExportedInput",
+    "ports": [
+      {
+        "name": "DATA_IN",
+        "port": "draw2d.OutputPort",
+        "locator": "draw2d.layout.locator.OutputPortLocator"
+      }
+    ],
+    "bgColor": "#333333",
+    "color": "#1B1B1B",
+    "stroke": 0,
+    "radius": 0
+  },
+  {
+    "type": "flowmaker.Legend",
+    "id": "35e91515-defd-aebd-dec9-59e1b35f690e",
+    "x": 30,
+    "y": 360,
+    "width": 90.9375,
+    "height": 23.1875,
+    "alpha": 1,
+    "userData": {},
+    "cssClass": "flowmaker_Legend",
+    "ports": [],
+    "bgColor": "#5B5B5B",
+    "color": "#FFFFFF",
+    "stroke": 1,
+    "radius": 5,
+    "text": "Another comment",
+    "outlineStroke": 0,
+    "outlineColor": "none",
+    "fontSize": 14,
+    "fontColor": "#FFFFFF",
+    "fontFamily": null
+  },
+  {
+    "type": "flowmaker.Connection",
+    "id": "1f6e6c0a-be8d-6c8c-2a2d-9451b573ceed",
+    "alpha": 1,
+    "userData": {},
+    "cssClass": "flowmaker_Connection",
+    "stroke": 3,
+    "color": "#00A8F0",
+    "outlineStroke": 1,
+    "outlineColor": "#303030",
+    "policy": "draw2d.policy.line.LineSelectionFeedbackPolicy",
+    "router": "draw2d.layout.connection.SplineConnectionRouter",
+    "radius": 5,
+    "source": {
+      "node": "aff75649-21b9-2e28-9e8f-ca0d56224938",
+      "port": "output0"
+    },
+    "target": {
+      "node": "d880cca8-6005-fdf5-479a-1e29e08098e8",
+      "port": "input0"
+    }
+  },
+  {
+    "type": "flowmaker.Connection",
+    "id": "56ab6109-5b93-92c1-3ba9-a2f47b16eac5",
+    "alpha": 1,
+    "userData": {},
+    "cssClass": "flowmaker_Connection",
+    "stroke": 3,
+    "color": "#00A8F0",
+    "outlineStroke": 1,
+    "outlineColor": "#303030",
+    "policy": "draw2d.policy.line.LineSelectionFeedbackPolicy",
+    "router": "draw2d.layout.connection.SplineConnectionRouter",
+    "radius": 5,
+    "source": {
+      "node": "47d6b24a-2811-1727-a1f3-c887994ef077",
+      "port": "output0"
+    },
+    "target": {
+      "node": "d880cca8-6005-fdf5-479a-1e29e08098e8",
+      "port": "input2"
+    }
+  },
+  {
+    "type": "flowmaker.Connection",
+    "id": "7e76e64c-7a0e-6184-b10c-84bca0996dfb",
+    "alpha": 1,
+    "userData": {},
+    "cssClass": "flowmaker_Connection",
+    "stroke": 3,
+    "color": "#00A8F0",
+    "outlineStroke": 1,
+    "outlineColor": "#303030",
+    "policy": "draw2d.policy.line.LineSelectionFeedbackPolicy",
+    "router": "draw2d.layout.connection.SplineConnectionRouter",
+    "radius": 5,
+    "source": {
+      "node": "d880cca8-6005-fdf5-479a-1e29e08098e8",
+      "port": "output0"
+    },
+    "target": {
+      "node": "5959d02d-74f6-c541-e53d-fe1c4c866fa0",
+      "port": "input0"
+    }
+  },
+  {
+    "type": "flowmaker.Connection",
+    "id": "dcd1e2c7-5bf8-e033-31f7-ae1a3bc84f53",
+    "alpha": 1,
+    "userData": {},
+    "cssClass": "flowmaker_Connection",
+    "stroke": 3,
+    "color": "#B9DD69",
+    "outlineStroke": 1,
+    "outlineColor": "#303030",
+    "policy": "draw2d.policy.line.LineSelectionFeedbackPolicy",
+    "router": "draw2d.layout.connection.SplineConnectionRouter",
+    "radius": 5,
+    "source": {
+      "node": "5959d02d-74f6-c541-e53d-fe1c4c866fa0",
+      "port": "output0"
+    },
+    "target": {
+      "node": "185d1e7b-b066-2925-0b34-b62d852cdc77",
+      "port": "OUT_RESULT"
+    }
+  },
+  {
+    "type": "flowmaker.Connection",
+    "id": "e14f83b6-a0c8-8881-acb5-c9a4134b54a4",
+    "alpha": 1,
+    "userData": {},
+    "cssClass": "flowmaker_Connection",
+    "stroke": 3,
+    "color": "#F3546A",
+    "outlineStroke": 1,
+    "outlineColor": "#303030",
+    "policy": "draw2d.policy.line.LineSelectionFeedbackPolicy",
+    "router": "draw2d.layout.connection.SplineConnectionRouter",
+    "radius": 5,
+    "source": {
+      "node": "5959d02d-74f6-c541-e53d-fe1c4c866fa0",
+      "port": "output1"
+    },
+    "target": {
+      "node": "33ced729-f3fa-03b7-6d5e-83a751c5c35a",
+      "port": "input0"
+    }
+  },
+  {
+    "type": "flowmaker.Connection",
+    "id": "9c55d603-17b9-87c5-1b42-c7dd0d561f50",
+    "alpha": 1,
+    "userData": {},
+    "cssClass": "flowmaker_Connection",
+    "stroke": 3,
+    "color": "#00A8F0",
+    "outlineStroke": 1,
+    "outlineColor": "#303030",
+    "policy": "draw2d.policy.line.LineSelectionFeedbackPolicy",
+    "router": "draw2d.layout.connection.SplineConnectionRouter",
+    "radius": 5,
+    "source": {
+      "node": "32a3a3ae-550c-bb2f-0d85-36964c9b12f3",
+      "port": "DATA_IN"
+    },
+    "target": {
+      "node": "d880cca8-6005-fdf5-479a-1e29e08098e8",
+      "port": "input3"
+    }
+  },
+  {
+    "type": "flowmaker.Connection",
+    "id": "bad1c7de-8134-986e-67b4-61b40e1ec69c",
+    "alpha": 1,
+    "userData": {},
+    "cssClass": "flowmaker_Connection",
+    "stroke": 3,
+    "color": "#F3546A",
+    "outlineStroke": 1,
+    "outlineColor": "#303030",
+    "policy": "draw2d.policy.line.LineSelectionFeedbackPolicy",
+    "router": "draw2d.layout.connection.SplineConnectionRouter",
+    "radius": 5,
+    "source": {
+      "node": "d880cca8-6005-fdf5-479a-1e29e08098e8",
+      "port": "output1"
+    },
+    "target": {
+      "node": "33ced729-f3fa-03b7-6d5e-83a751c5c35a",
+      "port": "input0"
+    }
+  }
+]
