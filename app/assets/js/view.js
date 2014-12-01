@@ -12,14 +12,36 @@ flowmaker.View = draw2d.Canvas.extend({
     // Set scrolling area
     this.setScrollArea($("#" + id));
 
-    this.on('scroll', function(){
-        console.log(arguments);
+    this.on('scroll', function() {
+      console.log(arguments);
     });
   },
 
-  scrollTopLeft: function() {
-    this.scrollArea.scrollTop(0);
-    this.scrollArea.scrollLeft(0);
+  previewPNG: function(callback) {
+    // convert the canvas into a PNG image source string
+    var xCoords = [];
+    var yCoords = [];
+    var figures = this.getFigures();
+
+    if (figures.getSize() == null || figures.getSize() == 0) {
+      callback(null);
+      return;
+    }
+
+    figures.each(function(i, f) {
+      var b = f.getBoundingBox();
+      xCoords.push(b.x, b.x + b.w);
+      yCoords.push(b.y, b.y + b.h);
+    });
+    var minX = Math.min.apply(Math, xCoords) - 20;
+    var minY = Math.min.apply(Math, yCoords) - 20;
+    var width = Math.max.apply(Math, xCoords) - minX + 20;
+    var height = Math.max.apply(Math, yCoords) - minY + 20;
+
+    var writer = new draw2d.io.png.Writer();
+    writer.marshal(this, function(png){
+      callback(png, width, height);
+    }, new draw2d.geo.Rectangle(minX, minY, width, height));
   }
 
 });

@@ -42,6 +42,9 @@ flowmaker.Application = Class.extend({
     // Handle to currently opened local file
     this.currentFlowFile = null;
 
+    // Update the preview
+    this.updatePreview();
+
     // Register this class as event listener for the canvas CommandStack
     this.view.getCommandStack().addEventListener(this);
 
@@ -56,6 +59,18 @@ flowmaker.Application = Class.extend({
    */
   layout: function() {
     //this.appLayout.resizeAll();
+  },
+
+  updatePreview: function() {
+    /*
+    this.view.previewPNG(function(png, width, height) {
+      if (png == null) {
+        return;
+      }
+      $("#preview").css("width", "150px").css("height", Math.round((150*height/width)) + "px");
+      $("#preview").attr("src", png);
+    });
+    */
   },
 
   /**
@@ -135,21 +150,22 @@ flowmaker.Application = Class.extend({
   /**
    * Canvas' dblclick event handler
    */
-  onDoubleClick: function(emitterFunction) {
-  },
+  onDoubleClick: function(emitterFunction) {},
 
   /**
    * Called if the selection in the cnavas has been changed. You must register this
    * class on the canvas to receive this event.
    */
-  onSelectionChanged: function(emitter, figure) {
-  },
+  onSelectionChanged: function(emitter, figure) {},
 
   /**
    * Sent when an event occurs on the command stack. draw2d.command.CommandStackEvent.getDetail()
    * can be used to identify the type of event which has occurred.
    **/
-  stackChanged: function(event) {
+  stackChanged: function(e) {
+    if (e.isPostChangeEvent()) {
+      this.updatePreview();
+    }
   },
 
   /**
@@ -158,10 +174,10 @@ flowmaker.Application = Class.extend({
   load: function(jsonDocument) {
     this.view.setZoom(1.0, true);
     this.view.clear();
-    this.view.scrollTopLeft();
 
     var reader = new draw2d.io.json.Reader();
     reader.unmarshal(this.view, jsonDocument);
+    this.updatePreview();
   },
 
   /**
@@ -193,10 +209,12 @@ flowmaker.Application = Class.extend({
   openFlow: function() {
     var modal = $('#confirmModal');
     modal.find('.modal-title').text("Open New Flow");
-    modal.find('.modal-body').html('<input type="file" class="form-control" id="storage_files" name="files" /><br/>Any unsaved changes in the current flow will be lost!');
+    modal.find('.modal-body').html('<input type="file" class="form-control" id="storage_files" name="files" /><br/><span>Any unsaved changes in the current flow will be lost!</span>');
 
     modal.find('.btn-danger').hide();
+    modal.find('.btn-primary').hide();
 
+    /*
     var btn = modal.find('.btn-primary');
     btn.show();
     btn.addClass('disabled');
@@ -216,10 +234,26 @@ flowmaker.Application = Class.extend({
       reader.readAsText(f);
 
     }, this));
+    */
 
-    $('#storage_files').on('change', function(e) {
-      btn.removeClass('disabled');
-    });
+    $('#storage_files').on('change', $.proxy(function(e) {
+      //btn.removeClass('disabled');
+
+      modal.find('.modal-title').text("Please wait. Loading...");
+
+      var f = $('#storage_files').prop('files')[0];
+      f.title = f.name;
+      var reader = new FileReader();
+      reader.onload = $.proxy(function(e) {
+        this.currentFlowFile = f;
+        this.load(e.target.result);
+        modal.modal('hide');
+      }, this);
+
+      //modal.find('.modal-body').append('Loading flow...');
+      reader.readAsText(f);
+
+    }, this));
 
     modal.modal('show');
   },
@@ -233,7 +267,7 @@ flowmaker.Application = Class.extend({
       "Save",
       $.proxy(function() {
         var writer = new draw2d.io.json.Writer();
-        writer.marshal(this.view, function(json){
+        writer.marshal(this.view, function(json) {
           /*
           var storage = new draw2d.storage.LocalFileStorage();
           storage.saveFile("~/demo.json", JSON.stringify(json, null, 2), "", function(data){
@@ -241,7 +275,9 @@ flowmaker.Application = Class.extend({
             console.log(data);
           });
           */
-          var blob = new Blob([JSON.stringify(json, null, 2)], {type: "application/json"});
+          var blob = new Blob([JSON.stringify(json, null, 2)], {
+            type: "application/json"
+          });
           saveAs(blob, $('#single-content').val());
 
         });
@@ -426,8 +462,7 @@ flowmaker.Application = Class.extend({
 
 $(window).load(function() {
   var app = new flowmaker.Application();
-  $(window).resize(function(){
+  $(window).resize(function() {
     console.log(this);
   });
 });
-
