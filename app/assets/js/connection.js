@@ -116,6 +116,11 @@ flowmaker.Connection = draw2d.Connection.extend({
     } else {
       this.label.setAlpha(0);
     }
+  },
+
+  setPersistentAttributes: function(memento) {
+    this._super(memento);
+    this.setCapacity(this.userData.capacity);
   }
 
 });

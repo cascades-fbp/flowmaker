@@ -174,7 +174,9 @@
     "type": "flowmaker.Connection",
     "id": "229a586d-e044-0199-d755-f07118d6e4f1",
     "alpha": 1,
-    "userData": {},
+    "userData": {
+      "capacity": "1"
+    },
     "cssClass": "flowmaker_Connection",
     "stroke": 3,
     "color": "#00A8F0",
@@ -240,7 +242,9 @@
     "type": "flowmaker.Connection",
     "id": "aee8f748-f79b-f440-aa86-d5676528b39d",
     "alpha": 1,
-    "userData": {},
+    "userData": {
+      "capacity": "33"
+    },
     "cssClass": "flowmaker_Connection",
     "stroke": 3,
     "color": "#00A8F0",
