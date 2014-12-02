@@ -22,9 +22,17 @@ flowmaker.Connection = draw2d.Connection.extend({
       bgColor: '#ffffff'
     });
     this.label.setAlpha(0);
-
     this.add(this.label, new draw2d.layout.locator.ManhattanMidpointLocator());
     //this.add(this.label, new draw2d.layout.locator.ParallelMidpointLocator());
+
+    this.labelEditor = new draw2d.ui.LabelEditor({
+      text: "Set connection capacity integer value",
+      onCommit: $.proxy(function(value) {
+        this.setCapacity(value);
+      }, this),
+      onCancel: function() {}
+    });
+    this.label.installEditor(this.labelEditor);
 
     this.setCapacity(null);
   },
@@ -47,13 +55,7 @@ flowmaker.Connection = draw2d.Connection.extend({
       callback: $.proxy(function(key, options) {
         switch (key) {
           case "capacity":
-            var editor = new draw2d.ui.LabelEditor({
-              onCommit: $.proxy(function(value) {
-                this.setCapacity(value);
-              }, this),
-              onCancel: function() {}
-            });
-            editor.start(this.label);
+            this.labelEditor.start(this.label);
             break;
           case "capacity-reset":
             this.setCapacity(null);
