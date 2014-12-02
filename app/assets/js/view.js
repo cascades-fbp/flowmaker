@@ -7,6 +7,12 @@ flowmaker.View = draw2d.Canvas.extend({
     var policy = new draw2d.policy.canvas.SnapToGridEditPolicy();
     policy.setGrid(10);
     policy.setGridColor('#efefef');
+    // Move to front on click
+    policy.onClick = function(figure, position) {
+      if (figure != null) {
+        figure.toFront();
+      }
+    }
     this.installEditPolicy(policy);
 
     // Set scrolling area
@@ -39,7 +45,7 @@ flowmaker.View = draw2d.Canvas.extend({
     var height = Math.max.apply(Math, yCoords) - minY + 20;
 
     var writer = new draw2d.io.png.Writer();
-    writer.marshal(this, function(png){
+    writer.marshal(this, function(png) {
       callback(png, width, height);
     }, new draw2d.geo.Rectangle(minX, minY, width, height));
   }

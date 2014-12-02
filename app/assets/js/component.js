@@ -113,24 +113,25 @@ flowmaker.Component = draw2d.shape.basic.Rectangle.extend({
         },
         "sep2": "---------",
         "delete": {
-          name: "Delete",
-          icon: "delete"
+          name: "Delete"
         }
       }
     });
   },
 
   configurePorts: function() {
-    var port, ports;
+    var port, ports, label;
     ports = this.getInputPorts();
     for (var i = 0; i < ports.getSize(); i++) {
       port = ports.get(i);
-      port.add(new draw2d.shape.basic.Label({text:port.getName().toUpperCase(), stroke:0}), new draw2d.layout.locator.InputPortLocator())
+      label = new draw2d.shape.basic.Label({text:port.getName().toUpperCase(), stroke:0});
+      port.add(label, new draw2d.layout.locator.InputPortLocator())
     };
     ports = this.getOutputPorts();
     for (var i = 0; i < ports.getSize(); i++) {
       port = ports.get(i);
-      port.add(new draw2d.shape.basic.Label({text:port.getName().toUpperCase(), stroke:0}), new draw2d.layout.locator.OutputPortLocator())
+      label = new draw2d.shape.basic.Label({text:port.getName().toUpperCase(), stroke:0})
+      port.add(label, new draw2d.layout.locator.OutputPortLocator())
     };
   },
 

@@ -17,7 +17,12 @@ flowmaker.Connection = draw2d.Connection.extend({
     this.setRadius(5);
     this.setColor('#00A8F0');
 
-    this.label = new draw2d.shape.basic.Label({stroke:1, bgColor:'#ffffff'});
+    this.label = new draw2d.shape.basic.Label({
+      stroke: 1,
+      bgColor: '#ffffff'
+    });
+    this.label.setAlpha(0);
+
     this.add(this.label, new draw2d.layout.locator.ManhattanMidpointLocator());
     //this.add(this.label, new draw2d.layout.locator.ParallelMidpointLocator());
 
@@ -41,6 +46,18 @@ flowmaker.Connection = draw2d.Connection.extend({
       },
       callback: $.proxy(function(key, options) {
         switch (key) {
+          case "capacity":
+            var editor = new draw2d.ui.LabelEditor({
+              onCommit: $.proxy(function(value) {
+                this.setCapacity(value);
+              }, this),
+              onCancel: function() {}
+            });
+            editor.start(this.label);
+            break;
+          case "capacity-reset":
+            this.setCapacity(null);
+            break;
           case "red":
             this.setColor('#f3546a');
             break;
@@ -63,6 +80,9 @@ flowmaker.Connection = draw2d.Connection.extend({
       items: {
         "capacity": {
           name: "Set capacity"
+        },
+        "capacity-reset": {
+          name: "Reset capacity"
         },
         "sep": "---------",
         "red": {
@@ -92,6 +112,9 @@ flowmaker.Connection = draw2d.Connection.extend({
     this.userData.capacity = capacity;
     if (this.userData.capacity != null) {
       this.label.setText(capacity);
+      this.label.setAlpha(1);
+    } else {
+      this.label.setAlpha(0);
     }
   }
 
