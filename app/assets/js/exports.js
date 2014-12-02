@@ -10,7 +10,8 @@ flowmaker.ExportedInput = draw2d.shape.icon.Import.extend({
     this.createPort("output");
 
     this.label = new draw2d.shape.basic.Label({
-      bold: true
+      bold: true,
+      stroke: 0
     });
     this.add(this.label, new draw2d.layout.locator.BottomLocator());
 
@@ -86,7 +87,8 @@ flowmaker.ExportedOutput = draw2d.shape.icon.Export.extend({
     this.createPort("input");
 
     this.label = new draw2d.shape.basic.Label({
-      bold: true
+      bold: true,
+      stroke: 0
     });
     this.add(this.label, new draw2d.layout.locator.BottomLocator());
 

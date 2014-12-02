@@ -19,17 +19,13 @@ flowmaker.Component = draw2d.shape.basic.Rectangle.extend({
       'component': component
     };
 
-    var port;
     for (var i = 0; i < inNum; i++) {
-      port = this.createPort("input");
-      //port.add(new draw2d.shape.basic.Label({text:"IN"}), new draw2d.layout.locator.InputPortLocator())
-      //this.node.addPort(new draw2d.InputPort(), new draw2d.layout.locator.LeftLocator());
+      this.createPort("input");
     };
     for (var i = 0; i < outNum; i++) {
-      port = this.createPort("output");
-      //port.add(new draw2d.shape.basic.Label({text:"OUT"}), new draw2d.layout.locator.OutputPortLocator())
-      //this.node.addPort(new draw2d.OutputPort(), new draw2d.layout.locator.RightLocator());
+      this.createPort("output");
     };
+    this.configurePorts();
 
     // Icon
     //this.add(new draw2d.shape.icon.Acw(), new draw2d.layout.locator.CenterLocator());
@@ -37,10 +33,12 @@ flowmaker.Component = draw2d.shape.basic.Rectangle.extend({
     // labels setup
     this.nameLabel = new draw2d.shape.basic.Label({
       text: this.userData.name,
-      bold: true
+      bold: true,
+      stroke: 0
     });
     this.componentLabel = new draw2d.shape.basic.Label({
-      text: this.userData.component
+      text: this.userData.component,
+      stroke: 0
     });
     this.add(this.nameLabel, new draw2d.layout.locator.TopLocator());
     this.add(this.componentLabel, new draw2d.layout.locator.BottomLocator());
@@ -122,6 +120,20 @@ flowmaker.Component = draw2d.shape.basic.Rectangle.extend({
     });
   },
 
+  configurePorts: function() {
+    var port, ports;
+    ports = this.getInputPorts();
+    for (var i = 0; i < ports.getSize(); i++) {
+      port = ports.get(i);
+      port.add(new draw2d.shape.basic.Label({text:port.getName().toUpperCase(), stroke:0}), new draw2d.layout.locator.InputPortLocator())
+    };
+    ports = this.getOutputPorts();
+    for (var i = 0; i < ports.getSize(); i++) {
+      port = ports.get(i);
+      port.add(new draw2d.shape.basic.Label({text:port.getName().toUpperCase(), stroke:0}), new draw2d.layout.locator.OutputPortLocator())
+    };
+  },
+
   /**
    * Return an objects with all important attributes for XML or JSON serialization
    */
@@ -152,6 +164,8 @@ flowmaker.Component = draw2d.shape.basic.Rectangle.extend({
 
     this.nameLabel.setText(this.userData.name);
     this.componentLabel.setText(this.userData.component);
+
+    this.configurePorts();
 
     /*
     // remove all decorations created in the constructor of this element

@@ -8,12 +8,20 @@ flowmaker.Connection = draw2d.Connection.extend({
   init: function(attr) {
     this._super(attr);
 
+    this.userData = {}
+
     this.setRouter(new draw2d.layout.connection.SplineConnectionRouter());
     this.setOutlineStroke(1);
     this.setOutlineColor("#303030");
     this.setStroke(3);
     this.setRadius(5);
     this.setColor('#00A8F0');
+
+    this.label = new draw2d.shape.basic.Label({stroke:1, bgColor:'#ffffff'});
+    this.add(this.label, new draw2d.layout.locator.ManhattanMidpointLocator());
+    //this.add(this.label, new draw2d.layout.locator.ParallelMidpointLocator());
+
+    this.setCapacity(null);
   },
 
   /**
@@ -53,25 +61,38 @@ flowmaker.Connection = draw2d.Connection.extend({
       x: x,
       y: y,
       items: {
+        "capacity": {
+          name: "Set capacity"
+        },
+        "sep": "---------",
         "red": {
           name: "Red",
-          icon: "edit"
         },
         "green": {
           name: "Green",
-          icon: "cut"
         },
         "blue": {
           name: "Blue",
-          icon: "copy"
         },
         "sep1": "---------",
         "delete": {
           name: "Delete",
-          icon: "delete"
         }
       }
     });
+  },
+
+  setCapacity: function(capacity) {
+    if (capacity == undefined) {
+      capacity = null
+    }
+    if (capacity != null && capacity < 0) {
+      capacity = 0;
+    }
+    this.userData.capacity = capacity;
+    if (this.userData.capacity != null) {
+      this.label.setText(capacity);
+    }
   }
 
 });
