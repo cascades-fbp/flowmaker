@@ -1,8 +1,8 @@
 {
   "name": "FlowMaker",
-  "version": "0.0.1",
+  "version": "DEVELOPMENT",
   "description": "A visual tool for designing FBP flows.",
-  "main": "Gruntfile.js",
+  "main": "dev.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -20,5 +20,20 @@
     "grunt-contrib-less": "^0.12.0",
     "grunt-contrib-uglify": "~0.5.0",
     "grunt-node-webkit-builder": "^0.3.0"
+  },
+  "window": {
+    "title": "FlowerMaker DEVELOPMENT",
+    "icon": "link.png",
+    "toolbar": true,
+    "frame": true,
+    "width": 900,
+    "height": 500,
+    "position": "center",
+    "min_width": 800,
+    "min_height": 700,
+    "show": true
+  },
+  "webkit": {
+    "plugin": false
   }
 }
