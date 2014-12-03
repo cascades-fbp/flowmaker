@@ -35,8 +35,8 @@ module.exports = function(grunt) {
           './vendors/draw2d_GPL_5/lib/pathfinding-browser.min.js',
           './vendors/draw2d_GPL_5/src/draw2d.js',
           './bower_components/jquery.browser/dist/jquery.browser.min.js',
-          './bower_components/FileSaver.js/FileSaver.min.js',
           './bower_components/bootstrap/dist/js/bootstrap.min.js',
+          './app/assets/js/utils.js',
           './app/assets/js/app.js',
           './app/assets/js/view.js',
           './app/assets/js/toolbar.js',
@@ -114,7 +114,7 @@ module.exports = function(grunt) {
     },
     nodewebkit: {
       options: {
-        platforms: ['osx', 'win', 'linux64'],
+        platforms: ['osx'], //['osx', 'win', 'linux64'],
         credits: './public/credits.html',
         buildDir: './webkitbuilds',
       },

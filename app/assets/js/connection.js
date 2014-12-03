@@ -43,7 +43,6 @@ flowmaker.Connection = draw2d.Connection.extend({
    * Either loooong press or right click with the mouse.
    */
   onContextMenu: function(x, y) {
-    console.log("flowmaker.Connection.onContextMenu()");
     this.select();
     $.contextMenu({
       selector: 'body',

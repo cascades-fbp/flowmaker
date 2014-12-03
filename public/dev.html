@@ -41,6 +41,9 @@
     <div id="canvas"></div>
     <!-- Canvas preview -->
     <!--<img id="preview"/>-->
+    <!-- File dialogs -->
+    <input type="file" id="saveDialog" style="display: none;" nwsaveas accept=".json,.flow" nwworkingdir="" />
+    <input type="file" id="openDialog" style="display: none;" accept=".json,.flow" nwworkingdir="" />
     <!-- Add/Edit Component Modal Dialog -->
     <div class="modal" id="addComponentModal" tabindex="-1" role="dialog" aria-labelledby="node-title" aria-hidden="true">
       <div class="modal-dialog modal-sm">
@@ -72,7 +75,7 @@
                   <option value="7">7</option>
                   <option value="8">8</option>
                   <option value="9">9</option>
-                  <option value="10">0</option>
+                  <option value="10">10</option>
                 </select>
               </div>
               <div class="form-group">
@@ -88,7 +91,7 @@
                   <option value="7">7</option>
                   <option value="8">8</option>
                   <option value="9">9</option>
-                  <option value="10">0</option>
+                  <option value="10">10</option>
                 </select>
               </div>
             </form>
@@ -188,8 +191,8 @@
     <script src="/vendors/draw2d_GPL_5/lib/pathfinding-browser.min.js"></script>
     <script src="/vendors/draw2d_GPL_5/src/draw2d.js"></script>
     <script src="/bower_components/jquery.browser/dist/jquery.browser.min.js"></script>
-    <script src="/bower_components/FileSaver.js/FileSaver.min.js"></script>
     <script src="/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="/app/assets/js/utils.js"></script>
     <script src="/app/assets/js/app.js"></script>
     <script src="/app/assets/js/view.js"></script>
     <script src="/app/assets/js/toolbar.js"></script>

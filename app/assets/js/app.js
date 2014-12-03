@@ -54,7 +54,7 @@ flowmaker.Application = Class.extend({
     this.view.on("select", $.proxy(this.onSelectionChanged, this));
 
     // It's ugly but ok for the prototype like this (use document as event bus)
-    $(document).on("editComponent", $.proxy(function(event, id){
+    $(document).on("editComponent", $.proxy(function(event, id) {
       this.editComponent(id);
     }, this));
   },
@@ -214,49 +214,22 @@ flowmaker.Application = Class.extend({
    * Open a new flow from local file system
    */
   openFlow: function() {
-    var modal = $('#confirmModal');
-    modal.find('.modal-title').text("Open New Flow");
-    modal.find('.modal-body').html('<p class="text-danger">Warning: any unsaved changes in the current flow will be lost!</p><span class="btn btn-default btn-file">Select file...<input type="file" class="form-control" id="storage_files" name="files" /></span>');
-    modal.find('.btn-danger').hide();
-    modal.find('.btn-primary').hide();
-
-    $('#storage_files').on('change', $.proxy(function(e) {
-      modal.find('.modal-title').text("Please wait. Loading...");
-
-      var f = $('#storage_files').prop('files')[0];
-      f.title = f.name;
-      var reader = new FileReader();
-      reader.onload = $.proxy(function(e) {
-        this.currentFlowFile = f;
-        this.load(e.target.result);
-        modal.modal('hide');
-      }, this);
-
-      reader.readAsText(f);
-
-    }, this));
-
-    modal.modal('show');
+    if (confirm("You are opening a new flow. Any unsaved changes in the current flow will be lost!\n\nAre you sure?")) {
+      this.view.clear();
+      chooseFile('#openDialog', $.proxy(function(data) {
+        this.load(data);
+      }, this));
+    }
   },
 
   /*
    * Show save flow as local file dialog and handle the actions
    */
   saveFlow: function() {
-    this._openSingleInputModal("Save Flow to File",
-      "Filename",
-      "Save",
-      $.proxy(function() {
-        var writer = new draw2d.io.json.Writer();
-        writer.marshal(this.view, function(json) {
-          var blob = new Blob([JSON.stringify(json, null, 2)], {
-            type: "application/json"
-          });
-          saveAs(blob, $('#single-content').val());
-
-        });
-        return true;
-      }, this));
+    var writer = new draw2d.io.json.Writer();
+    writer.marshal(this.view, function(json) {
+      saveToFile('#saveDialog', 'Untitled', JSON.stringify(json, null, 2));
+    });
   },
 
   /**
@@ -383,19 +356,34 @@ flowmaker.Application = Class.extend({
       form.find('.form-group:nth-child(2)').removeClass('has-error');
     }
 
-    // Create component
+    // Update component
+
     figure.setName(form.find('#node-name').val());
     figure.setComponent(form.find('#node-component').val());
-    if (figure.getInputPorts() < form.find('#node-inputs').val()) {
 
-    } else if (figure.getInputPorts() > form.find('#node-inputs').val()) {
-
+    var diff = figure.getInputPorts() < form.find('#node-inputs').val();
+    if (diff < 0) {
+      for (var i = 0; i < Math.abs(diff); i++) {
+        figure.createPort("input");
+      };
+    } else if (diff > 0) {
+      for (var i = figure.getInputPorts().getSize() - 1; i > diff; i--) {
+        figure.removePort(figure.getPort(i))
+      };
     }
-    if (figure.getOutputPorts() < form.find('#node-outputs').val()) {
 
-    } else if (figure.getOutputPorts() > form.find('#node-outputs').val()) {
-
+    diff = figure.getOutputPorts() < form.find('#node-outputs').val()
+    if (diff < 0) {
+      for (var i = 0; i < Math.abs(diff); i++) {
+        figure.createPort("output");
+      };
+    } else if (diff > 0) {
+      for (var i = figure.getOutputPorts().getSize() - 1; i > diff; i--) {
+        figure.removePort(figure.getPort(i))
+      };
     }
+
+    figure.configurePorts();
 
     return true;
   },
@@ -515,6 +503,7 @@ $(window).load(function() {
     console.log(this);
   });
   */
+
   app.load([{
     "type": "flowmaker.IIP",
     "id": "f86736d5-9cb3-0685-ceb5-24b8b665d48a",

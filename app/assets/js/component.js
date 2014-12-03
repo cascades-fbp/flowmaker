@@ -54,7 +54,6 @@ flowmaker.Component = draw2d.shape.basic.Rectangle.extend({
    * Either loooong press or right click with the mouse.
    */
   onContextMenu: function(x, y) {
-    console.log("flowmaker.Component.onContextMenu()");
     this.select();
     $.contextMenu({
       selector: 'body',

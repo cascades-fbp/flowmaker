@@ -19,7 +19,6 @@ flowmaker.ExportedInput = draw2d.shape.icon.Import.extend({
   },
 
   onContextMenu: function(x, y) {
-    console.log("flowmaker.ExportedOutput.onContextMenu()");
     this.select();
     $.contextMenu({
       selector: 'body',
@@ -49,7 +48,6 @@ flowmaker.ExportedInput = draw2d.shape.icon.Import.extend({
         "sep1": "---------",
         "delete": {
           name: "Delete",
-          icon: "delete"
         }
       }
     });
@@ -101,7 +99,6 @@ flowmaker.ExportedOutput = draw2d.shape.icon.Export.extend({
    * Either loooong press or right click with the mouse.
    */
   onContextMenu: function(x, y) {
-    console.log("flowmaker.ExportedOutput.onContextMenu()");
     this.select();
     $.contextMenu({
       selector: 'body',
@@ -131,7 +128,6 @@ flowmaker.ExportedOutput = draw2d.shape.icon.Export.extend({
         "sep1": "---------",
         "delete": {
           name: "Delete",
-          icon: "delete"
         }
       }
     });

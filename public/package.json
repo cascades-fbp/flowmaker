@@ -11,7 +11,7 @@
   "window": {
     "title": "FlowerMaker v0.0.1",
     "icon": "link.png",
-    "toolbar": false,
+    "toolbar": true,
     "frame": true,
     "width": 900,
     "height": 500,
