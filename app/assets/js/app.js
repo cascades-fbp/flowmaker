@@ -191,30 +191,17 @@ flowmaker.Application = Class.extend({
    * Shows confirm dialog and resets the canvas if confirmed
    */
   newFlow: function() {
-    var modal = $('#confirmModal');
-    modal.find('.modal-title').text("Create New Flow");
-    modal.find('.modal-body').html("Are you sure to reset the canvas and start a new flow?<br/><br/>Any unsaved changes in the current flow will be lost!");
-
-    modal.find('.btn-primary').hide();
-
-    var btn = modal.find('.btn-danger');
-    btn.show();
-    btn.text("Confirm");
-    btn.off('click');
-    btn.on('click', $.proxy(function() {
-      modal.modal('hide');
+    if (confirm("You are creating a new flow.\nAny unsaved changes in the current flow will be lost.\n\nAre you sure?")) {
       this.view.setZoom(1.0, true);
       this.view.clear();
-    }, this));
-
-    modal.modal('show');
+    }
   },
 
   /**
    * Open a new flow from local file system
    */
   openFlow: function() {
-    if (confirm("You are opening a new flow. Any unsaved changes in the current flow will be lost!\n\nAre you sure?")) {
+    if (confirm("You are about to load a flow from file. Any unsaved changes in the current flow will be lost!\n\nAre you sure?")) {
       this.view.clear();
       chooseFile('#openDialog', $.proxy(function(data) {
         this.load(data);
