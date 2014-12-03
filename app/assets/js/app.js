@@ -48,10 +48,15 @@ flowmaker.Application = Class.extend({
     // Register this class as event listener for the canvas CommandStack
     this.view.getCommandStack().addEventListener(this);
 
-    // Setup main view handler
+    // Setup main view handlers
     this.view.on("contextmenu", $.proxy(this.onContextMenu, this));
     this.view.on("dblclick", $.proxy(this.onDoubleClick, this));
     this.view.on("select", $.proxy(this.onSelectionChanged, this));
+
+    // It's ugly but ok for the prototype like this (use document as event bus)
+    $(document).on("editComponent", $.proxy(function(event, id){
+      this.editComponent(id);
+    }, this));
   },
 
   /**
@@ -212,35 +217,10 @@ flowmaker.Application = Class.extend({
     var modal = $('#confirmModal');
     modal.find('.modal-title').text("Open New Flow");
     modal.find('.modal-body').html('<p class="text-danger">Warning: any unsaved changes in the current flow will be lost!</p><span class="btn btn-default btn-file">Select file...<input type="file" class="form-control" id="storage_files" name="files" /></span>');
-
     modal.find('.btn-danger').hide();
     modal.find('.btn-primary').hide();
 
-    /*
-    var btn = modal.find('.btn-primary');
-    btn.show();
-    btn.addClass('disabled');
-    btn.text("Load");
-    btn.off('click');
-    btn.on('click', $.proxy(function() {
-      modal.modal('hide');
-
-      var f = $('#storage_files').prop('files')[0];
-      f.title = f.name;
-      var reader = new FileReader();
-      reader.onload = $.proxy(function(e) {
-        this.currentFlowFile = f;
-        this.load(e.target.result);
-        e.target.result
-      }, this);
-      reader.readAsText(f);
-
-    }, this));
-    */
-
     $('#storage_files').on('change', $.proxy(function(e) {
-      //btn.removeClass('disabled');
-
       modal.find('.modal-title').text("Please wait. Loading...");
 
       var f = $('#storage_files').prop('files')[0];
@@ -252,7 +232,6 @@ flowmaker.Application = Class.extend({
         modal.modal('hide');
       }, this);
 
-      //modal.find('.modal-body').append('Loading flow...');
       reader.readAsText(f);
 
     }, this));
@@ -270,13 +249,6 @@ flowmaker.Application = Class.extend({
       $.proxy(function() {
         var writer = new draw2d.io.json.Writer();
         writer.marshal(this.view, function(json) {
-          /*
-          var storage = new draw2d.storage.LocalFileStorage();
-          storage.saveFile("~/demo.json", JSON.stringify(json, null, 2), "", function(data){
-            console.log("OK");
-            console.log(data);
-          });
-          */
           var blob = new Blob([JSON.stringify(json, null, 2)], {
             type: "application/json"
           });
@@ -350,6 +322,80 @@ flowmaker.Application = Class.extend({
 
     // Add to canvas
     this.view.add(n, this.lastMouseEvent.x, this.lastMouseEvent.y);
+
+    return true;
+  },
+
+  /**
+   * Show modal dialog to edit a component by its id
+   */
+  editComponent: function(id) {
+    var figure = this.view.getFigure(id);
+    if (figure == null) {
+      return;
+    }
+
+    var modal = $('#addComponentModal');
+
+    modal.find('.modal-title').text("Edit Component");
+    modal.find('.btn-primary').text("Save changes");
+    modal.find('#node-name').val(figure.getName());
+    modal.find('#node-component').val(figure.getComponent());
+    modal.find('#node-inputs').val(figure.getInputPorts().getSize());
+    modal.find('#node-outputs').val(figure.getOutputPorts().getSize());
+
+    modal.find('.btn-primary').off('click');
+    modal.find('.btn-primary').on('click', $.proxy(function() {
+      if (this.handleEditComponent(id)) {
+        modal.modal('hide');
+      }
+    }, this));
+
+    modal.modal('show');
+    modal.find('#node-name').focus();
+  },
+
+  /**
+   * Handle changing component details
+   */
+  handleEditComponent: function(id) {
+    var figure = this.view.getFigure(id);
+    if (figure == null) {
+      alert("Component not found by ID: " + id);
+      return false;
+    }
+
+    var form = $('#addComponentModal');
+
+    // Validate input
+    if (form.find('#node-name').val() == '') {
+      form.find('.form-group:first').addClass('has-error');
+      form.find('#node-name').focus();
+      return false;
+    } else {
+      form.find('.form-group:first').removeClass('has-error');
+    }
+    if (form.find('#node-component').val() == '') {
+      form.find('.form-group:nth-child(2)').addClass('has-error');
+      form.find('#node-component').focus();
+      return false;
+    } else {
+      form.find('.form-group:nth-child(2)').removeClass('has-error');
+    }
+
+    // Create component
+    figure.setName(form.find('#node-name').val());
+    figure.setComponent(form.find('#node-component').val());
+    if (figure.getInputPorts() < form.find('#node-inputs').val()) {
+
+    } else if (figure.getInputPorts() > form.find('#node-inputs').val()) {
+
+    }
+    if (figure.getOutputPorts() < form.find('#node-outputs').val()) {
+
+    } else if (figure.getOutputPorts() > form.find('#node-outputs').val()) {
+
+    }
 
     return true;
   },

@@ -64,8 +64,10 @@ flowmaker.Component = draw2d.shape.basic.Rectangle.extend({
         }
       },
       callback: $.proxy(function(key, options) {
-        console.log(key, options);
         switch (key) {
+          case "edit":
+            $(document).trigger("editComponent", [this.getId()]);
+            break;
           case "bg-style-red":
             this.setBackgroundColor('#f3546a');
             break;
@@ -133,6 +135,24 @@ flowmaker.Component = draw2d.shape.basic.Rectangle.extend({
       label = new draw2d.shape.basic.Label({text:port.getName().toUpperCase(), stroke:0})
       port.add(label, new draw2d.layout.locator.OutputPortLocator())
     };
+  },
+
+  setName: function(name) {
+    this.userData.name = name;
+    this.nameLabel.setText(this.userData.name);
+  },
+
+  getName: function() {
+    return this.userData.name;
+  },
+
+  setComponent: function(component) {
+    this.userData.component = component;
+    this.componentLabel.setText(this.userData.component);
+  },
+
+  getComponent: function() {
+    return this.userData.component;
   },
 
   /**
