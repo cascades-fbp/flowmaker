@@ -59,6 +59,12 @@ flowmaker.Connection = draw2d.Connection.extend({
           case "capacity-reset":
             this.setCapacity(null);
             break;
+          case "edit-up-port":
+            this.editUpstreamPort();
+            break;
+          case "edit-down-port":
+          this.editDownstreamPort();
+            break;
           case "red":
             this.setColor('#f3546a');
             break;
@@ -86,6 +92,13 @@ flowmaker.Connection = draw2d.Connection.extend({
           name: "Reset capacity"
         },
         "sep": "---------",
+        "edit-up-port": {
+          name: "Edit upstream port",
+        },
+        "edit-down-port": {
+          name: "Edit downstream port",
+        },
+        "sep1": "---------",
         "red": {
           name: "Red",
         },
@@ -95,7 +108,7 @@ flowmaker.Connection = draw2d.Connection.extend({
         "blue": {
           name: "Blue",
         },
-        "sep1": "---------",
+        "sep2": "---------",
         "delete": {
           name: "Delete",
         }
@@ -117,6 +130,24 @@ flowmaker.Connection = draw2d.Connection.extend({
     } else {
       this.label.setAlpha(0);
     }
+  },
+
+  editUpstreamPort: function() {
+    var port = this.getSource();
+    var name = prompt("Change upstream port name:", port.getName());
+    if (name == null || name == "") {
+      return;
+    }
+    port.setName(port);
+  },
+
+  editDownstreamPort: function() {
+    var port = this.getTarget();
+    var name = prompt("Change downstream port name:", port.getName());
+    if (name == null || name == "") {
+      return;
+    }
+    port.setName(port);
   },
 
   setPersistentAttributes: function(memento) {

@@ -348,25 +348,33 @@ flowmaker.Application = Class.extend({
     figure.setName(form.find('#node-name').val());
     figure.setComponent(form.find('#node-component').val());
 
-    var diff = figure.getInputPorts() < form.find('#node-inputs').val();
+    var inputPorts = figure.getInputPorts()
+    var diff = inputPorts.getSize() - form.find('#node-inputs').val();
+    console.log("INPUT DIFF = ", diff);
     if (diff < 0) {
       for (var i = 0; i < Math.abs(diff); i++) {
+        console.log("Adding IN#", i);
         figure.createPort("input");
       };
     } else if (diff > 0) {
-      for (var i = figure.getInputPorts().getSize() - 1; i > diff; i--) {
-        figure.removePort(figure.getPort(i))
+      for (var i = inputPorts.getSize(); i >= diff; i--) {
+        console.log("Deleting IN#", i-1);
+        figure.removePort(inputPorts.get(i-1))
       };
     }
 
-    diff = figure.getOutputPorts() < form.find('#node-outputs').val()
+    outputPorts = figure.getOutputPorts()
+    diff = outputPorts.getSize() - form.find('#node-outputs').val()
+    console.log("OUTPUT DIFF = ", diff);
     if (diff < 0) {
       for (var i = 0; i < Math.abs(diff); i++) {
+        console.log("Adding OUT#", i);
         figure.createPort("output");
       };
     } else if (diff > 0) {
-      for (var i = figure.getOutputPorts().getSize() - 1; i > diff; i--) {
-        figure.removePort(figure.getPort(i))
+      for (var i = outputPorts.getSize(); i >= diff; i--) {
+        console.log("Deleting OUT#", i-1);
+        figure.removePort(outputPorts.get(i-1))
       };
     }
 
