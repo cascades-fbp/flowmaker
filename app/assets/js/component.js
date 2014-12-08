@@ -129,10 +129,6 @@ flowmaker.Component = draw2d.shape.basic.Rectangle.extend({
         text: port.getName().toUpperCase(),
         stroke: 0
       });
-      port.on("change:name", function(){
-        console.log("CHANGE");
-        console.log(arguments);
-      });
       port.add(label, new draw2d.layout.locator.InputPortLocator());
     };
     ports = this.getOutputPorts();
@@ -141,10 +137,6 @@ flowmaker.Component = draw2d.shape.basic.Rectangle.extend({
       label = new draw2d.shape.basic.Label({
         text: port.getName().toUpperCase(),
         stroke: 0
-      });
-      port.on("change:name", function(){
-        console.log("CHANGE");
-        console.log(arguments);
       });
       port.add(label, new draw2d.layout.locator.OutputPortLocator());
     };

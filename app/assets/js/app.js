@@ -16,25 +16,6 @@ flowmaker.Application = Class.extend({
   init: function() {
     this.view = new flowmaker.View("canvas");
     this.toolbar = new flowmaker.Toolbar(this, this.view);
-    /*
-    this.appLayout = $('#main').layout({
-      north: {
-        resizable: false,
-        closable: false,
-        spacing_open: 0,
-        spacing_closed: 0,
-        size: 50,
-        paneSelector: "nav"
-      },
-      center: {
-        resizable: false,
-        closable: false,
-        spacing_open: 0,
-        spacing_closed: 0,
-        paneSelector: "#canvas"
-      }
-    });
-    */
 
     // Keeps the last mouse event
     this.lastMouseEvent = null;

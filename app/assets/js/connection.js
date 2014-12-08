@@ -44,6 +44,9 @@ flowmaker.Connection = draw2d.Connection.extend({
    */
   onContextMenu: function(x, y) {
     this.select();
+
+    var self = this;
+
     $.contextMenu({
       selector: 'body',
       events: {
@@ -94,9 +97,15 @@ flowmaker.Connection = draw2d.Connection.extend({
         "sep": "---------",
         "edit-up-port": {
           name: "Edit upstream port",
+          disabled: function() {
+            return self.getSource().getParent().NAME != "flowmaker.Component";
+          }
         },
         "edit-down-port": {
           name: "Edit downstream port",
+          disabled: function() {
+            return self.getTarget().getParent().NAME != "flowmaker.Component";
+          }
         },
         "sep1": "---------",
         "red": {
@@ -138,7 +147,9 @@ flowmaker.Connection = draw2d.Connection.extend({
     if (name == null || name == "") {
       return;
     }
-    port.setName(port);
+    port.setName(name);
+    var label = port.getChildren().get(0);
+    label.setText(name);
   },
 
   editDownstreamPort: function() {
@@ -147,7 +158,9 @@ flowmaker.Connection = draw2d.Connection.extend({
     if (name == null || name == "") {
       return;
     }
-    port.setName(port);
+    port.setName(name);
+    var label = port.getChildren().get(0);
+    label.setText(name);
   },
 
   setPersistentAttributes: function(memento) {
