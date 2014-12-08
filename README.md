@@ -2,6 +2,17 @@
 
 Yet another tool for creating and exploring Flow-Based Programming (FBP) diagrams.
 
+## Preview
+
+## Example of a flow
+
+![Example of a flow](https://raw.githubusercontent.com/cascades-fbp/flowmaker/master/docs/demo_net.png)
+
+## Adding new component
+
+![Adding new component](https://raw.githubusercontent.com/cascades-fbp/flowmaker/master/docs/demo_add_component.png)
+
+
 ## Installation
 
 Open releases tab and get the binary version.
