@@ -11,13 +11,13 @@
   "window": {
     "title": "FlowerMaker v0.0.1",
     "icon": "link.png",
-    "toolbar": true,
+    "toolbar": false,
     "frame": true,
     "width": 900,
-    "height": 500,
+    "height": 600,
     "position": "center",
     "min_width": 800,
-    "min_height": 600,
+    "min_height": 500,
     "show": true
   },
   "webkit": {

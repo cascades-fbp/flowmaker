@@ -5,10 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>FlowMaker</title>
-    <!--
-    <link href="/bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="/vendors/draw2d_GPL_5/css/contextmenu.css" rel="stylesheet">
-    -->
     <link href="assets/css/frontend.css" rel="stylesheet">
   </head>
   <body>
@@ -29,6 +25,9 @@
           <button type="button" class="btn btn-default navbar-btn" id="toolbar-zoomout" aria-label="Zoom Out"><span class="glyphicon glyphicon-zoom-out" aria-hidden="true"></span></button>
         </div>
         <div class="btn-group">
+          <button type="button" class="btn btn-default navbar-btn" id="toolbar-export-png" aria-label="Export as PNG"><span class="glyphicon glyphicon-picture" aria-hidden="true"></span></button>
+        </div>
+        <div class="btn-group">
           <button type="button" class="btn btn-default navbar-btn" id="toolbar-help" aria-label="Help"><span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span></button>
         </div>
         <div class="navbar-form navbar-right">
@@ -42,7 +41,7 @@
     <!-- Canvas -->
     <div id="canvas"></div>
     <!-- Canvas preview -->
-    <!--<img id="preview"/>-->
+    <img id="preview"/>
     <!-- File dialogs -->
     <input type="file" id="saveDialog" style="display: none;" nwsaveas accept=".json,.flow" nwworkingdir="" />
     <input type="file" id="openDialog" style="display: none;" accept=".json,.flow" nwworkingdir="" />
@@ -148,6 +147,9 @@
             <h4>Adding components to diagram</h4>
             <p>You can add components, IIPs, comments, etc from the context menu when clicking on the
             canvas (<code>Right-Click</code> with your mouse under Windows platform or <code>Two-fingers-Click</code> / <code><kbd>Ctrl</kbd> + Click</code> on the Touchpad
+            under OSX).</p>
+            <h4>Edit component, port, connection or IIP</h4>
+            <p>A component, IIP and connection provide a context menu with edit operations (<code>Right-Click</code> with your mouse under Windows platform or <code>Two-fingers-Click</code> / <code><kbd>Ctrl</kbd> + Click</code> on the Touchpad
             under OSX).</p>
             <h4>Basic operations</h4>
             <p><span class="glyphicon glyphicon-file"></span> Reset canvas and start a new flow from scratch</p>

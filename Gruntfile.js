@@ -36,16 +36,15 @@ module.exports = function(grunt) {
           './vendors/draw2d_GPL_5/src/draw2d.js',
           './bower_components/jquery.browser/dist/jquery.browser.min.js',
           './bower_components/bootstrap/dist/js/bootstrap.min.js',
-          './app/assets/js/utils.js',
           './app/assets/js/app.js',
           './app/assets/js/view.js',
           './app/assets/js/toolbar.js',
-          './app/assets/js/properties.js',
           './app/assets/js/connection.js',
           './app/assets/js/component.js',
           './app/assets/js/iip.js',
           './app/assets/js/exports.js',
           './app/assets/js/legend.js',
+          './app/assets/js/utils.js',
         ],
         dest: './public/assets/js/frontend.js',
       },
@@ -115,7 +114,7 @@ module.exports = function(grunt) {
     nodewebkit: {
       options: {
         platforms: ['osx'], //['osx', 'win', 'linux64'],
-        credits: './public/credits.html',
+        //credits: './public/credits.html',
         buildDir: './webkitbuilds',
       },
       src: ['./public/**/*']
@@ -131,7 +130,8 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-node-webkit-builder');
 
   // Default task.
-  grunt.registerTask('build', ['jshint', 'concat', 'uglify']);
+  //grunt.registerTask('build', ['jshint', 'concat', 'uglify']);
+  grunt.registerTask('build', ['jshint', 'concat']);
   //grunt.registerTask('default', ['build', 'connect:public', 'watch']);
   grunt.registerTask('default', ['connect:root']);
   // Build the desktop app
