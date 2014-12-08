@@ -76,6 +76,9 @@ flowmaker.Component = draw2d.shape.basic.Rectangle.extend({
           case "bg-style-blue":
             this.setBackgroundColor('#00A8F0');
             break;
+          case "bg-style-yellow":
+            this.setBackgroundColor('#f0c000');
+            break;
           case "bg-style-reset":
             this.setBackgroundColor(this.DEFAULT_BACKGROUND_COLOR);
             break;
@@ -94,23 +97,21 @@ flowmaker.Component = draw2d.shape.basic.Rectangle.extend({
           name: "Edit",
         },
         "sep1": "---------",
-        "bg-style": {
-          name: "Background",
-          items: {
-            "bg-style-red": {
-              name: "Red"
-            },
-            "bg-style-green": {
-              name: "Green"
-            },
-            "bg-style-blue": {
-              name: "Blue"
-            },
-            "bg-style-sep": "---------",
-            "bg-style-reset": {
-              name: "Reset"
-            }
-          }
+        "bg-style-red": {
+          name: "Red"
+        },
+        "bg-style-green": {
+          name: "Green"
+        },
+        "bg-style-blue": {
+          name: "Blue"
+        },
+        "bg-style-yellow": {
+          name: "Yellow"
+        },
+        "bg-style-sep": "---------",
+        "bg-style-reset": {
+          name: "Reset color"
         },
         "sep2": "---------",
         "delete": {

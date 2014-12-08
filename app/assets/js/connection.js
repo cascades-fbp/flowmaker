@@ -77,6 +77,9 @@ flowmaker.Connection = draw2d.Connection.extend({
           case "blue":
             this.setColor('#00A8F0');
             break;
+          case "yellow":
+            this.setColor('#f0c000');
+            break;
           case "delete":
             var cmd = new draw2d.command.CommandDelete(this);
             this.getCanvas().getCommandStack().execute(cmd);
@@ -116,6 +119,9 @@ flowmaker.Connection = draw2d.Connection.extend({
         },
         "blue": {
           name: "Blue",
+        },
+        "yellow": {
+          name: "Yellow",
         },
         "sep2": "---------",
         "delete": {
