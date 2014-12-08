@@ -59,6 +59,15 @@ flowmaker.Application = Class.extend({
     */
   },
 
+  exportPNG: function() {
+    this.view.generatePNG(function(png, base64) {
+      var binaryData = new Buffer(base64, 'base64').toString('binary');
+
+      $('#saveDialog').attr('accept', '.png');
+      saveToFile('#saveDialog', 'Untitled', binaryData);
+    });
+  },
+
   /**
    * Canvas' contextmenu event handler
    */
@@ -196,6 +205,7 @@ flowmaker.Application = Class.extend({
   saveFlow: function() {
     var writer = new draw2d.io.json.Writer();
     writer.marshal(this.view, function(json) {
+      $('#saveDialog').attr('accept', '.json,.flow');
       saveToFile('#saveDialog', 'Untitled', JSON.stringify(json, null, 2));
     });
   },

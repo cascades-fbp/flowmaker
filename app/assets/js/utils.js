@@ -36,7 +36,7 @@ function saveToFile(element, suggFilename, data) {
       fs.unlinkSync(filepath);
     }
 
-    fs.writeFile(filepath, data, function(err) {
+    fs.writeFile(filepath, data, "binary", function(err) {
       if (err) {
         alert("Failed to save file: " + err);
       }

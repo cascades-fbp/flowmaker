@@ -33,6 +33,10 @@ flowmaker.Toolbar = Class.extend({
       self.app.layout();
     });
 
+    $('#toolbar-export-png').on('click', function(){
+      self.app.exportPNG();
+    });
+
     $('#toolbar-help').on('click', function(){
       self.app.showHelp();
     });
