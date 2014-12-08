@@ -113,7 +113,7 @@ module.exports = function(grunt) {
     },
     nodewebkit: {
       options: {
-        platforms: ['osx'], //['osx', 'win', 'linux64'],
+        platforms: ['osx', 'win', 'linux64'],
         //credits: './public/credits.html',
         buildDir: './webkitbuilds',
       },

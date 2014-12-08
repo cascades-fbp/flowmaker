@@ -61,8 +61,12 @@ flowmaker.Application = Class.extend({
 
   exportPNG: function() {
     this.view.generatePNG(function(png, base64) {
-      var binaryData = new Buffer(base64, 'base64').toString('binary');
+      if (base64 == null) {
+        alert("Failed to create PNG from the current diagram!");
+        return;
+      }
 
+      var binaryData = new Buffer(base64, 'base64').toString('binary');
       $('#saveDialog').attr('accept', '.png');
       saveToFile('#saveDialog', 'Untitled', binaryData);
     });
@@ -339,7 +343,6 @@ flowmaker.Application = Class.extend({
     figure.setComponent(form.find('#node-component').val());
 
     // Do the port magic
-    console.log("======= MAGIC =======");
     var inputPorts = figure.getInputPorts()
     var diff = inputPorts.getSize() - form.find('#node-inputs').val();
     if (diff < 0) {
@@ -482,4 +485,319 @@ flowmaker.Application = Class.extend({
 
 $(window).load(function() {
   var app = new flowmaker.Application();
+  app.load(
+    [{
+      "type": "flowmaker.IIP",
+      "id": "54d133e2-6e48-cfbf-cf1e-064a21cad54b",
+      "x": 160,
+      "y": 260,
+      "width": 70,
+      "height": 23.421875,
+      "alpha": 1,
+      "userData": {},
+      "cssClass": "flowmaker_IIP",
+      "ports": [{
+        "name": "output0",
+        "port": "draw2d.OutputPort",
+        "locator": "draw2d.layout.locator.OutputPortLocator"
+      }],
+      "bgColor": "none",
+      "color": "#1B1B1B",
+      "stroke": 1,
+      "radius": 0,
+      "text": "{...}",
+      "outlineStroke": 0,
+      "outlineColor": "none",
+      "fontSize": 12,
+      "fontColor": "#080808",
+      "fontFamily": null
+    }, {
+      "type": "flowmaker.Component",
+      "id": "c3f3c880-af22-01c9-9cfe-eebd0c6221b3",
+      "x": 370,
+      "y": 290,
+      "width": 110,
+      "height": 180,
+      "alpha": 1,
+      "userData": {
+        "name": "demo",
+        "component": "core/demo"
+      },
+      "cssClass": "flowmaker_Component",
+      "ports": [{
+        "name": "ALEX",
+        "port": "draw2d.InputPort",
+        "locator": "draw2d.layout.locator.InputPortLocator"
+      }, {
+        "name": "OUT",
+        "port": "draw2d.OutputPort",
+        "locator": "draw2d.layout.locator.OutputPortLocator"
+      }, {
+        "name": "DEMO[3]",
+        "port": "draw2d.InputPort",
+        "locator": "draw2d.layout.locator.InputPortLocator"
+      }, {
+        "name": "output1",
+        "port": "draw2d.OutputPort",
+        "locator": "draw2d.layout.locator.OutputPortLocator"
+      }, {
+        "name": "output2",
+        "port": "draw2d.OutputPort",
+        "locator": "draw2d.layout.locator.OutputPortLocator"
+      }],
+      "bgColor": "#B9DD69",
+      "color": "#1B1B1B",
+      "stroke": 1,
+      "radius": 0
+    }, {
+      "type": "flowmaker.Component",
+      "id": "c434dabc-3bf0-82ed-6783-b22498807a2b",
+      "x": 180,
+      "y": 410,
+      "width": 90,
+      "height": 65,
+      "alpha": 1,
+      "userData": {
+        "name": "123",
+        "component": "qwe"
+      },
+      "cssClass": "flowmaker_Component",
+      "ports": [{
+        "name": "input0",
+        "port": "draw2d.InputPort",
+        "locator": "draw2d.layout.locator.InputPortLocator"
+      }, {
+        "name": "output0",
+        "port": "draw2d.OutputPort",
+        "locator": "draw2d.layout.locator.OutputPortLocator"
+      }],
+      "bgColor": "#EFEFEF",
+      "color": "#1B1B1B",
+      "stroke": 1,
+      "radius": 0
+    }, {
+      "type": "flowmaker.ExportedOutput",
+      "id": "2af42740-ab3a-01eb-16c9-61b268cc6489",
+      "x": 620,
+      "y": 490,
+      "width": 50,
+      "height": 50,
+      "alpha": 1,
+      "userData": {
+        "name": "ERR"
+      },
+      "cssClass": "flowmaker_ExportedOutput",
+      "ports": [{
+        "name": "ERR",
+        "port": "draw2d.InputPort",
+        "locator": "draw2d.layout.locator.InputPortLocator"
+      }],
+      "bgColor": "#333333",
+      "color": "#1B1B1B",
+      "stroke": 0,
+      "radius": 0
+    }, {
+      "type": "flowmaker.ExportedInput",
+      "id": "ff514d40-4c70-1bfa-050a-b697119eb1c7",
+      "x": 50,
+      "y": 320,
+      "width": 50,
+      "height": 50,
+      "alpha": 1,
+      "userData": {
+        "name": "IN"
+      },
+      "cssClass": "flowmaker_ExportedInput",
+      "ports": [{
+        "name": "IN",
+        "port": "draw2d.OutputPort",
+        "locator": "draw2d.layout.locator.OutputPortLocator"
+      }],
+      "bgColor": "#333333",
+      "color": "#1B1B1B",
+      "stroke": 0,
+      "radius": 0
+    }, {
+      "type": "flowmaker.Component",
+      "id": "59d4f3e1-e84c-5ccb-b6b0-228ff41f2261",
+      "x": 600,
+      "y": 230,
+      "width": 90,
+      "height": 65,
+      "alpha": 1,
+      "userData": {
+        "name": "console",
+        "component": "core/console"
+      },
+      "cssClass": "flowmaker_Component",
+      "ports": [{
+        "name": "IN",
+        "port": "draw2d.InputPort",
+        "locator": "draw2d.layout.locator.InputPortLocator"
+      }],
+      "bgColor": "#F0C000",
+      "color": "#1B1B1B",
+      "stroke": 1,
+      "radius": 0
+    }, {
+      "type": "flowmaker.ExportedOutput",
+      "id": "97eff5e0-743c-f34a-d572-c207b12afd03",
+      "x": 610,
+      "y": 360,
+      "width": 50,
+      "height": 50,
+      "alpha": 1,
+      "userData": {
+        "name": "OUT"
+      },
+      "cssClass": "flowmaker_ExportedOutput",
+      "ports": [{
+        "name": "OUT",
+        "port": "draw2d.InputPort",
+        "locator": "draw2d.layout.locator.InputPortLocator"
+      }],
+      "bgColor": "#333333",
+      "color": "#1B1B1B",
+      "stroke": 0,
+      "radius": 0
+    }, {
+      "type": "flowmaker.Connection",
+      "id": "01594026-d8c6-1ee8-4a59-e35759b15274",
+      "alpha": 1,
+      "userData": {
+        "capacity": null
+      },
+      "cssClass": "flowmaker_Connection",
+      "stroke": 3,
+      "color": "#00A8F0",
+      "outlineStroke": 1,
+      "outlineColor": "#303030",
+      "policy": "draw2d.policy.line.LineSelectionFeedbackPolicy",
+      "router": "draw2d.layout.connection.SplineConnectionRouter",
+      "radius": 5,
+      "source": {
+        "node": "54d133e2-6e48-cfbf-cf1e-064a21cad54b",
+        "port": "output0"
+      },
+      "target": {
+        "node": "c3f3c880-af22-01c9-9cfe-eebd0c6221b3",
+        "port": "ALEX"
+      }
+    }, {
+      "type": "flowmaker.Connection",
+      "id": "b6d2b4b6-25ef-daf2-1e45-d8318a01cda8",
+      "alpha": 1,
+      "userData": {
+        "capacity": null
+      },
+      "cssClass": "flowmaker_Connection",
+      "stroke": 3,
+      "color": "#00A8F0",
+      "outlineStroke": 1,
+      "outlineColor": "#303030",
+      "policy": "draw2d.policy.line.LineSelectionFeedbackPolicy",
+      "router": "draw2d.layout.connection.SplineConnectionRouter",
+      "radius": 5,
+      "source": {
+        "node": "c434dabc-3bf0-82ed-6783-b22498807a2b",
+        "port": "output0"
+      },
+      "target": {
+        "node": "c3f3c880-af22-01c9-9cfe-eebd0c6221b3",
+        "port": "DEMO[3]"
+      }
+    }, {
+      "type": "flowmaker.Connection",
+      "id": "6b3f4a72-f119-5e3a-0d33-3f998ba74d02",
+      "alpha": 1,
+      "userData": {
+        "capacity": null
+      },
+      "cssClass": "flowmaker_Connection",
+      "stroke": 3,
+      "color": "#00A8F0",
+      "outlineStroke": 1,
+      "outlineColor": "#303030",
+      "policy": "draw2d.policy.line.LineSelectionFeedbackPolicy",
+      "router": "draw2d.layout.connection.SplineConnectionRouter",
+      "radius": 5,
+      "source": {
+        "node": "ff514d40-4c70-1bfa-050a-b697119eb1c7",
+        "port": "IN"
+      },
+      "target": {
+        "node": "c434dabc-3bf0-82ed-6783-b22498807a2b",
+        "port": "input0"
+      }
+    }, {
+      "type": "flowmaker.Connection",
+      "id": "161f01cf-1e9a-4edb-a683-829fc5acbe97",
+      "alpha": 1,
+      "userData": {
+        "capacity": null
+      },
+      "cssClass": "flowmaker_Connection",
+      "stroke": 3,
+      "color": "#F3546A",
+      "outlineStroke": 1,
+      "outlineColor": "#303030",
+      "policy": "draw2d.policy.line.LineSelectionFeedbackPolicy",
+      "router": "draw2d.layout.connection.SplineConnectionRouter",
+      "radius": 5,
+      "source": {
+        "node": "c3f3c880-af22-01c9-9cfe-eebd0c6221b3",
+        "port": "output2"
+      },
+      "target": {
+        "node": "2af42740-ab3a-01eb-16c9-61b268cc6489",
+        "port": "ERR"
+      }
+    }, {
+      "type": "flowmaker.Connection",
+      "id": "a024d728-cace-360b-bfb7-746828dc9fd1",
+      "alpha": 1,
+      "userData": {
+        "capacity": null
+      },
+      "cssClass": "flowmaker_Connection",
+      "stroke": 3,
+      "color": "#F0C000",
+      "outlineStroke": 1,
+      "outlineColor": "#303030",
+      "policy": "draw2d.policy.line.LineSelectionFeedbackPolicy",
+      "router": "draw2d.layout.connection.SplineConnectionRouter",
+      "radius": 5,
+      "source": {
+        "node": "c3f3c880-af22-01c9-9cfe-eebd0c6221b3",
+        "port": "OUT"
+      },
+      "target": {
+        "node": "59d4f3e1-e84c-5ccb-b6b0-228ff41f2261",
+        "port": "IN"
+      }
+    }, {
+      "type": "flowmaker.Connection",
+      "id": "e77f2561-514d-3399-12a4-9a8703591ecf",
+      "alpha": 1,
+      "userData": {
+        "capacity": null
+      },
+      "cssClass": "flowmaker_Connection",
+      "stroke": 3,
+      "color": "#B9DD69",
+      "outlineStroke": 1,
+      "outlineColor": "#303030",
+      "policy": "draw2d.policy.line.LineSelectionFeedbackPolicy",
+      "router": "draw2d.layout.connection.SplineConnectionRouter",
+      "radius": 5,
+      "source": {
+        "node": "c3f3c880-af22-01c9-9cfe-eebd0c6221b3",
+        "port": "output1"
+      },
+      "target": {
+        "node": "97eff5e0-743c-f34a-d572-c207b12afd03",
+        "port": "OUT"
+      }
+    }]
+  );
 });

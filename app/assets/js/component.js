@@ -123,24 +123,25 @@ flowmaker.Component = draw2d.shape.basic.Rectangle.extend({
 
   configurePorts: function() {
     var port, ports, label;
-    ports = this.getInputPorts();
-    for (var i = 0; i < ports.getSize(); i++) {
-      port = ports.get(i);
-      label = new draw2d.shape.basic.Label({
-        text: port.getName().toUpperCase(),
-        stroke: 0
-      });
-      port.add(label, new draw2d.layout.locator.InputPortLocator());
-    };
-    ports = this.getOutputPorts();
-    for (var i = 0; i < ports.getSize(); i++) {
-      port = ports.get(i);
-      label = new draw2d.shape.basic.Label({
-        text: port.getName().toUpperCase(),
-        stroke: 0
-      });
-      port.add(label, new draw2d.layout.locator.OutputPortLocator());
-    };
+
+    var updatePorts = function(ports, locator) {
+      for (var i = 0; i < ports.getSize(); i++) {
+        port = ports.get(i);
+        if (port.getChildren().getSize() > 0) {
+          label = port.getChildren().get(0);
+          label.setText(port.getName().toUpperCase());
+        } else {
+          label = new draw2d.shape.basic.Label({
+            text: port.getName().toUpperCase(),
+            stroke: 0
+          });
+        }
+        port.add(label, new locator());
+      };
+    }
+
+    updatePorts(this.getInputPorts(), draw2d.layout.locator.InputPortLocator);
+    updatePorts(this.getOutputPorts(), draw2d.layout.locator.OutputPortLocator);
   },
 
   setName: function(name) {
