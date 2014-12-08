@@ -30,6 +30,7 @@ flowmaker.ExportedInput = draw2d.shape.icon.Import.extend({
       callback: $.proxy(function(key, options) {
         switch (key) {
           case "edit":
+            this.editPortName();
             break;
           case "delete":
             var cmd = new draw2d.command.CommandDelete(this);
@@ -60,6 +61,15 @@ flowmaker.ExportedInput = draw2d.shape.icon.Import.extend({
     port.setName(this.userData.name);
 
     this.label.setText(this.userData.name);
+  },
+
+  editPortName: function() {
+    var port = this.getOutputPorts().get(0);
+    var name = prompt("Change exported port name:", port.getName());
+    if (name == null || name == "") {
+      return;
+    }
+    this.setName(name);
   },
 
   /**
@@ -110,6 +120,7 @@ flowmaker.ExportedOutput = draw2d.shape.icon.Export.extend({
       callback: $.proxy(function(key, options) {
         switch (key) {
           case "edit":
+            this.editPortName();
             break;
           case "delete":
             var cmd = new draw2d.command.CommandDelete(this);
@@ -140,6 +151,15 @@ flowmaker.ExportedOutput = draw2d.shape.icon.Export.extend({
     port.setName(this.userData.name);
 
     this.label.setText(this.userData.name);
+  },
+
+  editPortName: function() {
+    var port = this.getInputPorts().get(0);
+    var name = prompt("Change exported port name:", port.getName());
+    if (name == null || name == "") {
+      return;
+    }
+    this.setName(name);
   },
 
   /**
