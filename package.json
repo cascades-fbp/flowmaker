@@ -1,6 +1,6 @@
 {
   "name": "FlowMaker",
-  "version": "DEVELOPMENT",
+  "version": "v0.0.1",
   "description": "A visual tool for designing FBP flows.",
   "main": "dev.html",
   "scripts": {
@@ -22,7 +22,7 @@
     "grunt-node-webkit-builder": "^0.3.0"
   },
   "window": {
-    "title": "FlowerMaker DEVELOPMENT",
+    "title": "FlowerMaker v0.0.1",
     "icon": "link.png",
     "toolbar": true,
     "frame": true,
