@@ -1,4 +1,4 @@
-# FlowMake
+# FlowMaker
 
 Yet another tool for creating and exploring Flow-Based Programming (FBP) diagrams.
 
